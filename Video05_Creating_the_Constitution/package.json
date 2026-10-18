@@ -15,7 +15,8 @@
     "test": "vitest run",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "validate": "npm run typecheck && npm run lint && npm test && npm run build"
   },
   "dependencies": {
     "@hono/node-server": "^2.1.5",

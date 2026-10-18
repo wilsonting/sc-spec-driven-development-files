@@ -16,4 +16,4 @@ npm run dev    # http://localhost:3000 (set PORT to change it)
 npm test
 ```
 
-Other scripts: `npm run build`, `npm start`, `npm run lint`, `npm run format`, `npm run typecheck`.
+Other scripts: `npm run validate` (typecheck, lint, test, build — the merge gate), `npm run build`, `npm start`, `npm run lint`, `npm run format`, `npm run typecheck`.

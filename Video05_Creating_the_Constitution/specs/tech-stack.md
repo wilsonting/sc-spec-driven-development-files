@@ -45,3 +45,8 @@ AgentClinic is a single server-rendered TypeScript application. The server rende
 - **`tsc`** for type-checking and builds.
 - **Vitest** for unit and route tests.
 - **ESLint** and **Prettier** for linting and formatting.
+
+## Validation
+
+- Each phase's `validation.md` is backed by **Vitest** tests: every checkable item becomes a test (route tests via `app.request()`, no network port). Only checks that truly need a human or a browser stay manual.
+- **`npm run validate`** is the single merge gate. It runs typecheck, lint, tests, and build in that order and stops at the first failure.
