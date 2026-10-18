@@ -39,11 +39,11 @@ See [requirements](requirements.md) for scope and [validation](validation.md) fo
 
 ## 6. Layout subcomponents
 
-1. Split `src/views/Layout.tsx` into three subcomponents under `src/views/components/`:
+1. Split `src/views/Layout.tsx` into three subcomponents, each in its own file under `src/views/components/`:
    - `Header.tsx` — "AgentClinic" logo link and nav.
    - `Main.tsx` — `<main>` wrapper for page content.
    - `Footer.tsx` — site footer.
-2. `Layout.tsx` keeps the document shell (doctype, `<html>`, `<head>`) and composes `Header`, `Main`, and `Footer`.
+2. `Layout.tsx` keeps the document shell (doctype, `<html>`, `<head>`) and imports and composes `Header`, `Main`, and `Footer`; no subcomponent is defined inline in `Layout.tsx`.
 3. Existing layout tests keep passing unchanged.
 
 ## 7. Stylesheet

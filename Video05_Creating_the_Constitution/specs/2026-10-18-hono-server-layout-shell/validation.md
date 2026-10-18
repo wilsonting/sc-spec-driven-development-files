@@ -35,5 +35,6 @@ Tests use `app.request()` against the exported Hono app (no network port).
 ## Spec hygiene
 
 - [ ] `specs/tech-stack.md` says Node 24 LTS.
+- [ ] `Header`, `Main`, and `Footer` each live in their own file under `src/views/components/`, imported by `Layout.tsx`.
 - [ ] README has a "Getting started" section that works as written.
 - [ ] Nothing out of scope (design tokens/theming, database, auth, CI) was added.

@@ -13,6 +13,7 @@ First phase of the [roadmap](../roadmap.md). The repo currently holds only a Typ
 - **npm scripts:** `dev` (tsx watch), `build` (tsc), `start` (node dist), `test` (vitest run), `lint`, `format`, `typecheck`.
 - **Hono app** on `@hono/node-server`, listening on `PORT` (default `3000`). No `.env` library.
 - **Layout shell** (`hono/jsx`): a main `Layout` component composed of three subcomponents — `Header` ("AgentClinic" logo text and nav), `Main` (page content), and `Footer`.
+  - Each subcomponent lives in its own file under `src/views/components/` (`Header.tsx`, `Main.tsx`, `Footer.tsx`); `Layout.tsx` imports them rather than defining them inline.
   - Nav links to future routes: Agents (`/agents`), Ailments (`/ailments`), Therapies (`/therapies`), Appointments (`/appointments`).
 - **Stylesheet:** a single static `public/styles.css`, served at `/styles.css` and linked from the layout `<head>`. Minimal layout rules only.
 - **Home page** (`GET /`): AgentClinic name, a one-line tagline, and a "coming soon" placeholder section.
@@ -33,7 +34,7 @@ First phase of the [roadmap](../roadmap.md). The repo currently holds only a Typ
 | Decision | Choice | Rationale |
 | --- | --- | --- |
 | Styling | One static stylesheet with minimal layout rules | Wires up stylesheet serving now; Phase 2 fills in tokens and theming. |
-| Layout structure | `Layout` composes `Header`, `Main`, `Footer` | Each region can evolve independently in later phases. |
+| Layout structure | `Layout` composes `Header`, `Main`, `Footer`, one file per component | Each region can evolve independently in later phases; small files are easy to find and review. |
 | Nav targets | Link to planned routes, fall through to 404 | Shows the product shape in demos; exercises the 404 handler. |
 | App vs server split | `src/app.ts` exports the Hono app; `src/server.ts` starts it | Tests call `app.request()` without binding a port. |
 | Config | `PORT` env var, default `3000` | Simplest thing that works; no extra dependency. |
