@@ -16,6 +16,9 @@ First phase of the [roadmap](../roadmap.md). The repo currently holds only a Typ
   - Each subcomponent lives in its own file under `src/views/components/` (`Header.tsx`, `Main.tsx`, `Footer.tsx`); `Layout.tsx` imports them rather than defining them inline.
   - Nav links to future routes: Agents (`/agents`), Ailments (`/ailments`), Therapies (`/therapies`), Appointments (`/appointments`).
 - **Stylesheet:** a single static `public/styles.css`, served at `/styles.css` and linked from the layout `<head>`. Minimal layout rules only.
+- **Responsive layout** (see [tech stack](../tech-stack.md#styling)): the layout `<head>` includes the viewport meta tag; `styles.css` is mobile-first.
+  - Narrow screens: logo and nav stack vertically; nav links wrap; no horizontal scrolling down to 320px.
+  - From `40rem` wide (a `min-width` media query): logo and nav sit on one row.
 - **Home page** (`GET /`): AgentClinic name, a one-line tagline, and a "coming soon" placeholder section.
 - **404 page:** any unknown route (including the future nav routes) renders a "not found" page inside the layout with status 404.
 - **Health check** (`GET /health`): returns `200` with JSON `{ "status": "ok" }`.
@@ -34,6 +37,7 @@ First phase of the [roadmap](../roadmap.md). The repo currently holds only a Typ
 | Decision | Choice | Rationale |
 | --- | --- | --- |
 | Styling | One static stylesheet with minimal layout rules | Wires up stylesheet serving now; Phase 2 fills in tokens and theming. |
+| Responsive approach | Mobile-first CSS with one `min-width: 40rem` breakpoint | Smallest thing that satisfies the product principle; Phase 2 builds on it. |
 | Layout structure | `Layout` composes `Header`, `Main`, `Footer`, one file per component | Each region can evolve independently in later phases; small files are easy to find and review. |
 | Nav targets | Link to planned routes, fall through to 404 | Shows the product shape in demos; exercises the 404 handler. |
 | App vs server split | `src/app.ts` exports the Hono app; `src/server.ts` starts it | Tests call `app.request()` without binding a port. |

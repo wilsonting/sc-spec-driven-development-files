@@ -5,15 +5,16 @@ High-level implementation order in very small phases. Each phase:
 - fits in roughly one AI coding session,
 - is demoable when finished,
 - gets its own spec before implementation,
-- includes its own tests (no separate "add tests" phase).
+- includes its own tests (no separate "add tests" phase),
+- ships responsive pages: every new or changed page works on phone, tablet, and desktop widths (no separate "make it responsive" phase).
 
 ## Phase 1 — Hono server and layout shell ✅ Complete
 
-Set up ESM, `tsx`, Vitest, ESLint, and Prettier. Serve a home page from Hono using a shared JSX layout (header, nav, footer).
+Set up ESM, `tsx`, Vitest, ESLint, and Prettier. Serve a home page from Hono using a shared JSX layout (header, nav, footer) with a mobile-first responsive layout.
 
 ## Phase 2 — Styling and design tokens
 
-Add the single stylesheet with design tokens, base typography, light/dark mode, and a styled home page.
+Build out the stylesheet with design tokens, fluid base typography, light/dark mode, and a styled home page that stays responsive from phone to desktop.
 
 ## Phase 3 — SQLite and migrations
 
@@ -49,4 +50,4 @@ Replace the role switcher with cookie-session login and role-based access checks
 
 ## Phase 11 — Polish and accessibility
 
-Accessibility pass, empty and error states, responsive layout review, and demo-ready finishing touches.
+Accessibility pass, empty and error states, a cross-device responsive review of every page (catching regressions, since each phase already ships responsive pages), and demo-ready finishing touches.

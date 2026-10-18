@@ -24,12 +24,16 @@ It should therefore stay small, readable, and easy to extend one phase at a time
 
 - **Engineering (Mary):** a reliable site on a popular TypeScript stack, with dashboards giving agents and staff easy access.
 - **Product (Susan):** features covering agents, their ailments, therapies, and booking appointments.
-- **Marketing (Steve):** an attractive site that works well in modern browsers.
+- **Marketing (Steve):** an attractive site that works well in modern browsers, on phones, tablets, and desktops.
+
+## Product principles
+
+- **Responsive by default.** Every page of the web UI works on any screen size, from a 320px-wide phone to a wide desktop: no horizontal scrolling, readable text without zooming, and controls usable by touch as well as mouse and keyboard. Responsive design is part of every feature, not a later add-on.
 
 ## Non-goals
 
 - Real payments or billing.
 - Real medical (or "medical") claims.
 - Multi-tenancy.
-- Native mobile apps.
+- Native mobile apps (the responsive web UI covers mobile).
 - Integration with real LLM agents.

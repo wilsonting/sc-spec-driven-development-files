@@ -32,7 +32,13 @@ AgentClinic is a single server-rendered TypeScript application. The server rende
   - Design tokens via CSS custom properties (colors, spacing, type scale).
   - Native nesting, container queries, and `:has()` where useful.
   - Light and dark mode via `prefers-color-scheme`.
-- Targets current evergreen browsers (Chrome, Edge, Firefox, Safari).
+- **Responsive, mobile-first layout.**
+  - Every page includes `<meta name="viewport" content="width=device-width, initial-scale=1">`.
+  - Base styles target narrow screens; wider layouts are added with `min-width` media queries (page level) and container queries (components).
+  - Fluid sizing (`rem`, `%`, `clamp()`, flex/grid with wrapping) instead of fixed pixel widths; no horizontal scrolling down to 320px.
+  - Wide content (tables, long lists) reflows or scrolls within its own container, never the page.
+  - Touch targets at least 44×44px.
+- Targets current evergreen browsers (Chrome, Edge, Firefox, Safari) on desktop and mobile.
 
 ## Auth
 
@@ -48,5 +54,6 @@ AgentClinic is a single server-rendered TypeScript application. The server rende
 
 ## Validation
 
+- Each phase's `validation.md` includes responsive checks for the pages it adds or changes (Vitest for markup and stylesheet rules; a manual check at a narrow ~320px and a desktop viewport).
 - Each phase's `validation.md` is backed by **Vitest** tests: every checkable item becomes a test (route tests via `app.request()`, no network port). Only checks that truly need a human or a browser stay manual.
 - **`npm run validate`** is the single merge gate. It runs typecheck, lint, tests, and build in that order and stops at the first failure.

@@ -19,6 +19,9 @@ function expectLayout(html: string) {
   }
   expect(html).toMatch(/<footer>[\s\S]*<\/footer>/);
   expect(html).toContain('<link rel="stylesheet" href="/styles.css"/>');
+  expect(html).toContain(
+    '<meta name="viewport" content="width=device-width, initial-scale=1"/>',
+  );
 }
 
 describe("GET /styles.css", () => {
@@ -26,6 +29,12 @@ describe("GET /styles.css", () => {
     const res = await app.request("/styles.css");
     expect(res.status).toBe(200);
     expect(res.headers.get("content-type")).toMatch(/text\/css/);
+  });
+
+  it("is mobile-first, with a min-width media query for wider screens", async () => {
+    const css = await (await app.request("/styles.css")).text();
+    expect(css).toMatch(/@media \(min-width: [\d.]+rem\)/);
+    expect(css).not.toMatch(/@media \(max-width/);
   });
 });
 

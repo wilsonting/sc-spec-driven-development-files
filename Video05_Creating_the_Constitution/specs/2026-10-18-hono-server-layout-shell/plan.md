@@ -53,7 +53,14 @@ See [requirements](requirements.md) for scope and [validation](validation.md) fo
 3. Import `serveStatic` from `@hono/node-server/serve-static` in `src/app.ts` and serve `/styles.css` from `public/`.
 4. Link the stylesheet in the `<head>` of `Layout.tsx`.
 
-## 8. README
+## 8. Responsive layout
+
+1. Write failing tests: layout HTML contains the viewport meta tag; `styles.css` defines a `min-width` media query.
+2. Make `public/styles.css` mobile-first: `box-sizing: border-box`, long words wrap, header stacks logo and nav by default, nav links wrap.
+3. Add a `@media (min-width: 40rem)` rule that puts logo and nav on one row.
+4. Manually check the home and 404 pages at ~320px and at desktop width.
+
+## 9. README
 
 1. Add a "Getting started" section: prerequisites (Node 24+), `npm install`, `npm run dev`, `npm test`.
 2. Run the full [validation](validation.md) checklist.
