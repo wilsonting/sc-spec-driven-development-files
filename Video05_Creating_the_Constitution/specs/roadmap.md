@@ -7,7 +7,7 @@ High-level implementation order in very small phases. Each phase:
 - gets its own spec before implementation,
 - includes its own tests (no separate "add tests" phase).
 
-## Phase 1 — Hono server and layout shell
+## Phase 1 — Hono server and layout shell ✅ Complete
 
 Set up ESM, `tsx`, Vitest, ESLint, and Prettier. Serve a home page from Hono using a shared JSX layout (header, nav, footer).
 
