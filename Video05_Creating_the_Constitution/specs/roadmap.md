@@ -14,7 +14,7 @@ Set up ESM, `tsx`, Vitest, ESLint, and Prettier. Serve a home page from Hono usi
 
 ## Phase 2 — Styling and design tokens
 
-Build out the stylesheet with design tokens, fluid base typography, light/dark mode, and a styled home page that stays responsive from phone to desktop.
+Adopt Pico CSS for design tokens, fluid base typography, and light/dark mode, plus a small app stylesheet and a styled home page that stays responsive from phone to desktop.
 
 ## Phase 3 — SQLite and migrations
 
