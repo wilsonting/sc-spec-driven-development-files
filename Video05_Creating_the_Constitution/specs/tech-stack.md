@@ -6,7 +6,7 @@ AgentClinic is a single server-rendered TypeScript application. The server rende
 
 ## Runtime and language
 
-- **Node.js 22 LTS**
+- **Node.js 24 LTS**
 - **TypeScript** (strict mode)
 - **ESM** modules (migrate the starter `tsconfig.json` off CommonJS)
 - **npm** for package management
