@@ -30,7 +30,7 @@ AgentClinic is a single server-rendered TypeScript application. The server rende
 
 - **[Pico CSS](https://picocss.com) v2** (class-based build, jade theme) as the design system; no CSS build step.
   - Installed from npm (`@picocss/pico`) and served by Hono from `node_modules` at `/pico.min.css`; no CDN.
-  - Pico's `--pico-*` custom properties are the design tokens; overrides only from an allow-list kept in the phase spec.
+  - Pico's `--pico-*` custom properties are the design tokens; overrides only from the allow-list in [`specs/2026-10-18-styling-design-tokens/requirements.md`](2026-10-18-styling-design-tokens/requirements.md#pico-overrides), mirrored in `test/styles.test.ts`.
   - Light and dark mode via Pico's automatic `prefers-color-scheme` handling; no theme toggle.
 - **One small app stylesheet** (`public/styles.css`, loaded after Pico) for what Pico doesn't cover.
   - Uses Pico variables, never literal colors.
