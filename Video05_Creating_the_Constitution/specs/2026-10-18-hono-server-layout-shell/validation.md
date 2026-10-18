@@ -20,6 +20,7 @@ Tests use `app.request()` against the exported Hono app (no network port).
   - nav links to `/agents`, `/ailments`, `/therapies`, `/appointments`,
   - the footer,
   - the tagline.
+- [ ] The layout HTML links `/styles.css`, and `GET /styles.css` returns `200` with `Content-Type` `text/css`.
 - [ ] `GET /health` returns `200` with JSON body `{ "status": "ok" }`.
 - [ ] An unknown route (e.g. `/does-not-exist`) and a planned route (e.g. `/agents`) return `404` with HTML that still includes the layout and a "not found" message.
 
@@ -28,11 +29,11 @@ Tests use `app.request()` against the exported Hono app (no network port).
 - [ ] `npm run dev` starts the server and logs `http://localhost:3000`.
 - [ ] Open `http://localhost:3000` in a modern browser: home page renders with header, nav, tagline, and footer.
 - [ ] Click every nav link: each shows the 404 page inside the layout.
-- [ ] Browser console shows no errors.
+- [ ] Browser console shows no errors, and the network tab shows `/styles.css` loaded.
 - [ ] `PORT=4000 npm run dev` serves on port 4000.
 
 ## Spec hygiene
 
 - [ ] `specs/tech-stack.md` says Node 24 LTS.
 - [ ] README has a "Getting started" section that works as written.
-- [ ] Nothing out of scope (CSS, database, auth, CI) was added.
+- [ ] Nothing out of scope (design tokens/theming, database, auth, CI) was added.

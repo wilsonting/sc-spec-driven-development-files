@@ -37,7 +37,23 @@ See [requirements](requirements.md) for scope and [validation](validation.md) fo
 2. Create `src/views/pages/NotFound.tsx`.
 3. Register Hono's `notFound` handler to render it.
 
-## 6. README
+## 6. Layout subcomponents
+
+1. Split `src/views/Layout.tsx` into three subcomponents under `src/views/components/`:
+   - `Header.tsx` — "AgentClinic" logo link and nav.
+   - `Main.tsx` — `<main>` wrapper for page content.
+   - `Footer.tsx` — site footer.
+2. `Layout.tsx` keeps the document shell (doctype, `<html>`, `<head>`) and composes `Header`, `Main`, and `Footer`.
+3. Existing layout tests keep passing unchanged.
+
+## 7. Stylesheet
+
+1. Write failing tests: `GET /styles.css` → `200` with `text/css`; layout HTML contains `<link rel="stylesheet" href="/styles.css">`.
+2. Create `public/styles.css` with minimal layout rules (header / main / footer structure only; design tokens and theming wait for Phase 2).
+3. Import `serveStatic` from `@hono/node-server/serve-static` in `src/app.ts` and serve `/styles.css` from `public/`.
+4. Link the stylesheet in the `<head>` of `Layout.tsx`.
+
+## 8. README
 
 1. Add a "Getting started" section: prerequisites (Node 24+), `npm install`, `npm run dev`, `npm test`.
 2. Run the full [validation](validation.md) checklist.
