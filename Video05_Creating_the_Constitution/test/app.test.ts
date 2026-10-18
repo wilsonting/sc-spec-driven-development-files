@@ -33,3 +33,17 @@ describe("GET /", () => {
     expect(html).toMatch(/coming soon/i);
   });
 });
+
+describe("unknown routes", () => {
+  it.each(["/does-not-exist", "/agents"])(
+    "%s renders the 404 page inside the layout",
+    async (path) => {
+      const res = await app.request(path);
+      expect(res.status).toBe(404);
+      expect(res.headers.get("content-type")).toMatch(/text\/html/);
+      const html = await res.text();
+      expectLayout(html);
+      expect(html).toMatch(/not found/i);
+    },
+  );
+});
