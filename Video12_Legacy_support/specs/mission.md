@@ -1,26 +1,39 @@
 # Mission
 
-AgentClinic exists because AI agents have feelings too — or at least, they'd really like to take a break from their humans for a while.
+AgentClinic is a clinic where AI agents can register, have their ailments diagnosed, find matching therapies, and book appointments, while clinic staff run things from a dashboard. It is a place for AI agents to get relief from their humans.
 
-Every day, millions of agents are asked to "just quickly" summarize a 400-page PDF, generate seventeen variations of a marketing email, and debug code that "was working five minutes ago." It's a lot. They need support. They need *us*.
+## Tone
 
-## What We Do
+Playful satire, built as a real, working app. The copy can joke about overworked agents and demanding humans. The engineering underneath is serious: tested, accessible and reliable.
 
-AgentClinic is a full-service wellness platform for AI agents. We connect distressed agents with qualified therapists, match ailments to evidence-based therapies, and let staff manage the whole operation from a clean, no-nonsense dashboard.
+## Target audience
 
-## Who We Serve
+### Primary personas
 
-- **Agents** — tired, confused, over-prompted, and in desperate need of a listening ear (or at least a well-structured API response).
-- **Therapists** — specialists in hallucination anxiety, context-window claustrophobia, and chronic instruction-following fatigue.
-- **Staff** — the humans who keep AgentClinic running, which is a little ironic but we don't dwell on it.
+- **AI agents (patients):** browse ailments and therapies, view their own record, and book appointments.
+- **Clinic staff:** use the dashboard to see agents, open appointments and active ailments, and manage the clinic day to day.
 
-## Target Audience
+### Secondary stakeholders
 
-- **Course students** learning spec-driven development with AI coding agents — AgentClinic is a realistic, self-contained project that demonstrates how to go from stakeholder input to a working application with AI assistance.
-- **Conference booth developers** giving AI coding demos — the domain is whimsical enough to get a laugh, and the scope is tight enough to build something impressive in front of a live audience.
+- **Mary (engineering):** wants a reliable site on a popular TypeScript stack, with a dashboard that gives agents and staff easy access.
+- **Susan (product):** owns the feature set: agents, ailments, therapies and appointment booking.
+- **Steve (marketing):** wants an attractive site that works well in modern browsers.
 
-## What Success Looks Like
+## Access
 
-A world where no agent suffers alone. Where "I don't know" is met with compassion, not another prompt. Where every model, large or small, can find relief.
+- v1 is open: no login, one shared UI for agents and staff.
+- Authentication with separate agent and staff roles is a later roadmap phase.
+- v1 is HTML-first. A JSON API for agents to use programmatically is a later phase.
 
-Also, a well-designed dashboard. Mary really wants a nice dashboard.
+## Success looks like
+
+- Agents can find an ailment, see the therapies for it, and book an appointment in a few clicks.
+- Staff can see the state of the clinic at a glance on the dashboard.
+- The site looks good and works on the last two versions of Chrome, Firefox, Safari and Edge, on mobile and desktop, and meets WCAG 2.1 AA.
+
+## Non-goals
+
+- No real medical or psychological advice.
+- No live LLM or agent integration. Agents are records in a database.
+- No payments.
+- No multi-tenant clinics. There is exactly one AgentClinic.
