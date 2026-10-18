@@ -1,59 +1,76 @@
 /*
- * Minimal, mobile-first layout. Base rules target narrow screens; wider
- * layouts are added with min-width media queries. Design tokens,
- * typography, and theming come in Phase 2.
+ * App-only styles, loaded after Pico CSS (/pico.min.css). Pico provides the
+ * design tokens (--pico-* variables), typography, light/dark mode, and focus
+ * styles; this file only adds what Pico doesn't cover. Mobile-first: base
+ * rules target narrow screens; wider layouts use min-width media queries
+ * (page) and container queries (components). Use Pico variables, never
+ * literal colors.
  */
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+/* ---- Layout ---- */
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
+/* Pico's nav doesn't wrap: stack the logo above the links and let links wrap. */
+header nav {
   flex-direction: column;
-  overflow-wrap: break-word;
-}
-
-header,
-main,
-footer {
-  padding: 1rem;
-}
-
-header {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  align-items: flex-start;
 }
 
 header nav ul {
-  display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem 1rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
-header a {
-  display: inline-block;
-  padding-block: 0.5rem;
+/* Links already have 44px touch targets, so trim Pico's item padding. */
+header nav li {
+  padding-block: 0.25rem;
 }
 
-main {
-  flex: 1;
+header nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
 }
 
 @media (min-width: 40rem) {
-  header {
+  header nav {
     flex-direction: row;
-    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+  }
+}
+
+/* ---- Components ---- */
+
+.badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border: var(--pico-border-width) solid var(--pico-muted-border-color);
+  border-radius: var(--pico-border-radius);
+  color: var(--pico-muted-color);
+}
+
+/* ---- Pages: home ---- */
+
+.cards {
+  container-type: inline-size;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--pico-grid-column-gap);
+}
+
+.card-grid article {
+  margin: 0;
+}
+
+@container (min-width: 30rem) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container (min-width: 60rem) {
+  .card-grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

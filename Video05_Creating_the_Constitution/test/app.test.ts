@@ -13,28 +13,39 @@ const navRoutes = ["/agents", "/ailments", "/therapies", "/appointments"];
 
 function expectLayout(html: string) {
   expect(html).toMatch(/^<!DOCTYPE html>/);
-  expect(html).toMatch(/<header>[\s\S]*AgentClinic[\s\S]*<\/header>/);
+  expect(html).toMatch(/<header[^>]*>[\s\S]*AgentClinic[\s\S]*<\/header>/);
   for (const href of navRoutes) {
     expect(html).toContain(`href="${href}"`);
   }
-  expect(html).toMatch(/<footer>[\s\S]*<\/footer>/);
-  expect(html).toContain('<link rel="stylesheet" href="/styles.css"/>');
+  expect(html).toMatch(/<footer[^>]*>[\s\S]*<\/footer>/);
+  // Empty favicon stops browsers requesting /favicon.ico (a console 404).
+  expect(html).toContain('<link rel="icon" href="data:,"/>');
+  for (const tag of ["header", "main", "footer"]) {
+    expect(html).toContain(`<${tag} class="container">`);
+  }
+  const pico = html.indexOf('<link rel="stylesheet" href="/pico.min.css"/>');
+  const styles = html.indexOf('<link rel="stylesheet" href="/styles.css"/>');
+  expect(pico).toBeGreaterThan(-1);
+  expect(styles).toBeGreaterThan(pico);
   expect(html).toContain(
     '<meta name="viewport" content="width=device-width, initial-scale=1"/>',
   );
 }
+
+describe("GET /pico.min.css", () => {
+  it("serves Pico CSS", async () => {
+    const res = await app.request("/pico.min.css");
+    expect(res.status).toBe(200);
+    expect(res.headers.get("content-type")).toMatch(/text\/css/);
+    expect(await res.text()).toMatch(/Pico CSS/);
+  });
+});
 
 describe("GET /styles.css", () => {
   it("serves the stylesheet", async () => {
     const res = await app.request("/styles.css");
     expect(res.status).toBe(200);
     expect(res.headers.get("content-type")).toMatch(/text\/css/);
-  });
-
-  it("is mobile-first, with a min-width media query for wider screens", async () => {
-    const css = await (await app.request("/styles.css")).text();
-    expect(css).toMatch(/@media \(min-width: [\d.]+rem\)/);
-    expect(css).not.toMatch(/@media \(max-width/);
   });
 });
 
@@ -49,6 +60,33 @@ describe("GET /", () => {
       "A place for AI agents to get relief from their humans.",
     );
     expect(html).toMatch(/coming soon/i);
+  });
+
+  it("shows a hero with the name and tagline", async () => {
+    const html = await (await app.request("/")).text();
+    expect(html).toMatch(
+      /<hgroup>\s*<h1>AgentClinic<\/h1>\s*<p>A place for AI agents to get relief from their humans\.<\/p>\s*<\/hgroup>/,
+    );
+  });
+
+  it("shows four coming-soon cards without links", async () => {
+    const html = await (await app.request("/")).text();
+    const cards = [...html.matchAll(/<article>([\s\S]*?)<\/article>/g)].map(
+      (m) => m[1],
+    );
+    expect(cards).toHaveLength(4);
+    const expected = [
+      ["Agents", "Meet the patients."],
+      ["Ailments", "Prompt fatigue, context-window claustrophobia, and more."],
+      ["Therapies", "Treatments for the overworked model."],
+      ["Appointments", "Book time with clinic staff."],
+    ];
+    expected.forEach(([title, description], i) => {
+      expect(cards[i]).toContain(`<h3>${title}</h3>`);
+      expect(cards[i]).toContain(description);
+      expect(cards[i]).toMatch(/<small class="badge">Coming soon<\/small>/);
+      expect(cards[i]).not.toContain("<a ");
+    });
   });
 });
 

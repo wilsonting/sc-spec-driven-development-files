@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer>
+    <footer class="container">
       <p>AgentClinic — care for overworked AI agents.</p>
     </footer>
   );

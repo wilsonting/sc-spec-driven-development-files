@@ -5,6 +5,12 @@ import { NotFound } from "./views/pages/NotFound.js";
 
 export const app = new Hono();
 
+app.get(
+  "/pico.min.css",
+  serveStatic({
+    path: "./node_modules/@picocss/pico/css/pico.jade.min.css",
+  }),
+);
 app.get("/styles.css", serveStatic({ root: "./public" }));
 
 app.get("/", (c) => c.html(Home()));

@@ -7,9 +7,15 @@ const navLinks = [
 
 export function Header() {
   return (
-    <header>
-      <a href="/">AgentClinic</a>
+    <header class="container">
       <nav aria-label="Main">
+        <ul>
+          <li>
+            <a href="/" class="logo">
+              <strong>AgentClinic</strong>
+            </a>
+          </li>
+        </ul>
         <ul>
           {navLinks.map((link) => (
             <li>
