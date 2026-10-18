@@ -11,7 +11,7 @@ export function Header() {
       <nav aria-label="Main">
         <ul>
           <li>
-            <a href="/" class="logo">
+            <a href="/">
               <strong>AgentClinic</strong>
             </a>
           </li>

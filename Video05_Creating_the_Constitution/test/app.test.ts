@@ -1,3 +1,6 @@
+import { readFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { app } from "../src/app.js";
 
@@ -14,6 +17,10 @@ const navRoutes = ["/agents", "/ailments", "/therapies", "/appointments"];
 function expectLayout(html: string) {
   expect(html).toMatch(/^<!DOCTYPE html>/);
   expect(html).toMatch(/<header[^>]*>[\s\S]*AgentClinic[\s\S]*<\/header>/);
+  // Pico's nav pattern: one list for the logo, one for the links.
+  expect(html).toMatch(
+    /<nav aria-label="Main">\s*<ul>\s*<li>\s*<a href="\/"><strong>AgentClinic<\/strong><\/a>\s*<\/li>\s*<\/ul>\s*<ul>/,
+  );
   for (const href of navRoutes) {
     expect(html).toContain(`href="${href}"`);
   }
@@ -30,14 +37,36 @@ function expectLayout(html: string) {
   expect(html).toContain(
     '<meta name="viewport" content="width=device-width, initial-scale=1"/>',
   );
+  // No client JS, no theme toggle, no external stylesheets or fonts.
+  expect(html).not.toContain("<script");
+  expect(html).not.toContain("data-theme");
+  expect(html).not.toMatch(/href="(https?:)?\/\//);
 }
 
 describe("GET /pico.min.css", () => {
-  it("serves Pico CSS", async () => {
+  it("serves Pico's class-based jade build", async () => {
     const res = await app.request("/pico.min.css");
     expect(res.status).toBe(200);
     expect(res.headers.get("content-type")).toMatch(/text\/css/);
-    expect(await res.text()).toMatch(/Pico CSS/);
+    const jade = readFileSync(
+      fileURLToPath(import.meta.resolve("@picocss/pico/css/pico.jade.min.css")),
+      "utf8",
+    );
+    expect(await res.text()).toBe(jade);
+  });
+});
+
+describe("static files", () => {
+  it("are found even when the server starts from another directory", async () => {
+    const cwd = process.cwd();
+    process.chdir(tmpdir());
+    try {
+      for (const path of ["/pico.min.css", "/styles.css"]) {
+        expect((await app.request(path)).status, path).toBe(200);
+      }
+    } finally {
+      process.chdir(cwd);
+    }
   });
 });
 
@@ -59,7 +88,7 @@ describe("GET /", () => {
     expect(html).toContain(
       "A place for AI agents to get relief from their humans.",
     );
-    expect(html).toMatch(/coming soon/i);
+    expect(html).toContain('<h2 id="on-the-way">What’s on the way</h2>');
   });
 
   it("shows a hero with the name and tagline", async () => {

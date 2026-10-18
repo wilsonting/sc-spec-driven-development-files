@@ -7,6 +7,13 @@
  * literal colors.
  */
 
+/* ---- Base ---- */
+
+/* Long words wrap instead of widening the page (Pico doesn't set this). */
+body {
+  overflow-wrap: break-word;
+}
+
 /* ---- Layout ---- */
 
 /* Pico's nav doesn't wrap: stack the logo above the links and let links wrap. */
@@ -19,21 +26,33 @@ header nav ul {
   flex-wrap: wrap;
 }
 
-/* Links already have 44px touch targets, so trim Pico's item padding. */
+/* Pico pulls only the first list left; pull the stacked links list too so
+   it lines up with the logo. */
+header nav ul:last-of-type {
+  margin-inline-start: calc(var(--pico-nav-element-spacing-horizontal) * -1);
+}
+
+/* Pico's link padding and negative margins need this much item padding so
+   stacked 44px touch targets don't overlap. */
 header nav li {
-  padding-block: 0.25rem;
+  padding-block: 0.5rem;
 }
 
 header nav a {
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
+  min-width: 2.75rem;
 }
 
 @media (min-width: 40rem) {
   header nav {
     flex-direction: row;
     align-items: center;
+  }
+
+  header nav ul:last-of-type {
+    margin-inline-start: 0;
   }
 }
 
@@ -42,35 +61,51 @@ header nav a {
 .badge {
   display: inline-block;
   padding: 0.125rem 0.5rem;
-  border: var(--pico-border-width) solid var(--pico-muted-border-color);
+  border: var(--pico-border-width) solid var(--pico-muted-color);
   border-radius: var(--pico-border-radius);
-  color: var(--pico-muted-color);
+  color: var(--pico-color);
 }
 
 /* ---- Pages: home ---- */
 
+/* Container-query rem follows Pico's root font size, which grows with the
+   viewport; thresholds leave headroom below Pico's container widths. */
 .cards {
   container-type: inline-size;
 }
 
 .card-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--pico-grid-column-gap);
 }
 
 .card-grid article {
+  display: flex;
+  flex-direction: column;
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
-@container (min-width: 30rem) {
+/* Pico's h3 is too big for four teaser cards in a row ("Appointments" would
+   break at a 1024px viewport). */
+.card-grid h3 {
+  font-size: 1.25rem;
+}
+
+.card-grid .badge {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+@container (min-width: 26rem) {
   .card-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@container (min-width: 60rem) {
+@container (min-width: 48rem) {
   .card-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }

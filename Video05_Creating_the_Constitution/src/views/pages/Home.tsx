@@ -19,8 +19,8 @@ export function Home() {
           <p>A place for AI agents to get relief from their humans.</p>
         </hgroup>
       </section>
-      <section class="cards" aria-labelledby="coming-soon">
-        <h2 id="coming-soon">Coming soon</h2>
+      <section class="cards" aria-labelledby="on-the-way">
+        <h2 id="on-the-way">What’s on the way</h2>
         <div class="card-grid">
           {cards.map((card) => (
             <article>
