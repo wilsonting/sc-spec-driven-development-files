@@ -12,7 +12,7 @@ High-level implementation order in very small phases. Each phase:
 
 Set up ESM, `tsx`, Vitest, ESLint, and Prettier. Serve a home page from Hono using a shared JSX layout (header, nav, footer) with a mobile-first responsive layout.
 
-## Phase 2 — Styling and design tokens
+## Phase 2 — Styling and design tokens ✅ Complete
 
 Adopt Pico CSS for design tokens, fluid base typography, and light/dark mode, plus a small app stylesheet and a styled home page that stays responsive from phone to desktop.
 
