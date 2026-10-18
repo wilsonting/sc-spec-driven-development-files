@@ -1,17 +1,13 @@
 import { raw } from "hono/html";
 import type { Child } from "hono/jsx";
+import { Footer } from "./components/Footer.js";
+import { Header } from "./components/Header.js";
+import { Main } from "./components/Main.js";
 
 type LayoutProps = {
   title?: string;
   children: Child;
 };
-
-const navLinks = [
-  { href: "/agents", label: "Agents" },
-  { href: "/ailments", label: "Ailments" },
-  { href: "/therapies", label: "Therapies" },
-  { href: "/appointments", label: "Appointments" },
-];
 
 export function Layout({ title, children }: LayoutProps) {
   return (
@@ -24,22 +20,9 @@ export function Layout({ title, children }: LayoutProps) {
           <title>{title ? `${title} · AgentClinic` : "AgentClinic"}</title>
         </head>
         <body>
-          <header>
-            <a href="/">AgentClinic</a>
-            <nav aria-label="Main">
-              <ul>
-                {navLinks.map((link) => (
-                  <li>
-                    <a href={link.href}>{link.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </header>
-          <main>{children}</main>
-          <footer>
-            <p>AgentClinic — care for overworked AI agents.</p>
-          </footer>
+          <Header />
+          <Main>{children}</Main>
+          <Footer />
         </body>
       </html>
     </>
