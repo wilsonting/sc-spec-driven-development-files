@@ -1,14 +1,16 @@
 # Changelog
 
-<!-- last-commit: b44fa54 -->
+<!-- last-commit: 3c59bbb -->
 
 ## 2026-10-18
 
+- Update Phase 2 spec and validation for review fixes
+- Fix review findings: overflow, static paths, card grid, nav, tests
 - Record Phase 2 validation results and mark roadmap Phase 2 complete
 - Update tech stack and roadmap for Pico CSS
 - Style the app with Pico CSS: hero, card grid, and narrow-screen nav
 - Add Phase 2 spec: styling with Pico CSS
-
+- Update changelog
 - Make responsive design a product principle and apply it to the layout
 - Back validation with Vitest and add npm run validate
 - Record Phase 1 validation results
