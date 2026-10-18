@@ -18,7 +18,16 @@ function expectLayout(html: string) {
     expect(html).toContain(`href="${href}"`);
   }
   expect(html).toMatch(/<footer>[\s\S]*<\/footer>/);
+  expect(html).toContain('<link rel="stylesheet" href="/styles.css"/>');
 }
+
+describe("GET /styles.css", () => {
+  it("serves the stylesheet", async () => {
+    const res = await app.request("/styles.css");
+    expect(res.status).toBe(200);
+    expect(res.headers.get("content-type")).toMatch(/text\/css/);
+  });
+});
 
 describe("GET /", () => {
   it("renders the home page inside the layout", async () => {

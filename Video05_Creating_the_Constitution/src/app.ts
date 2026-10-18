@@ -1,8 +1,11 @@
+import { serveStatic } from "@hono/node-server/serve-static";
 import { Hono } from "hono";
 import { Home } from "./views/pages/Home.js";
 import { NotFound } from "./views/pages/NotFound.js";
 
 export const app = new Hono();
+
+app.get("/styles.css", serveStatic({ root: "./public" }));
 
 app.get("/", (c) => c.html(Home()));
 
